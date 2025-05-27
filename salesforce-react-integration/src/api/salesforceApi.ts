@@ -1,17 +1,14 @@
-const BASE_URL = "/services/data/v59.0";
+const BASE_URL = "/services/apexrest/accounts";
 
 export async function getAccounts(csrfToken: string) {
-  const res = await fetch(
-    `${BASE_URL}/query/?q=SELECT+Id,Name,Industry,Phone+FROM+Account+LIMIT+10`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": csrfToken,
-      },
-      credentials: "include", // ✅ this must be outside "headers"
-    }
-  );
+  const res = await fetch(`${BASE_URL}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
+    credentials: "include", // ✅ this must be outside "headers"
+  });
 
   if (!res.ok) {
     throw new Error(`Failed to fetch accounts: ${res.status}`);
