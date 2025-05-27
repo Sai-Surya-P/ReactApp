@@ -1,8 +1,11 @@
 export async function fetchCSRFToken(): Promise<string> {
-  const res = await fetch("/services/data/v59.0/", {
+  const res = await fetch("/services/data/v59.0/csrfToken", {
     method: "GET",
     credentials: "include",
   });
-  const token = res.headers.get("X-CSRF-Token");
-  return token || "";
+  const csrfData = await res.json();
+  const csrfToken = csrfData.token;
+  // const token = res.headers.get("X-CSRF-Token");
+  console.log("token:", csrfToken);
+  return csrfToken || "";
 }
