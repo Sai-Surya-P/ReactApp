@@ -16,7 +16,7 @@ export async function getAccounts(csrfToken: string) {
   if (!res.ok) {
     throw new Error(`Failed to fetch accounts: ${res.status}`);
   }
-
+  console.log("data", res.json());
   return res.json(); // should contain { records: [...] }
 }
 
