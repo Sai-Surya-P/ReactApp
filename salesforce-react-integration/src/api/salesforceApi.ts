@@ -1,5 +1,4 @@
-const BASE_URL =
-  "https://streamforcesolutions10-dev-ed.develop.builder.salesforce-experience.com/services/data/v59.0";
+const BASE_URL = "/services/data/v59.0";
 
 export async function getAccounts(csrfToken: string) {
   const res = await fetch(
