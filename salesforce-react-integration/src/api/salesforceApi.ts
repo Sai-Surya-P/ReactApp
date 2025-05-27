@@ -4,13 +4,20 @@ export async function getAccounts(csrfToken: string) {
   const res = await fetch(
     `${BASE_URL}/query/?q=SELECT+Id,Name,Industry,Phone+FROM+Account+LIMIT+10`,
     {
+      method: "GET",
       headers: {
+        "Content-Type": "application/json",
         "X-CSRF-Token": csrfToken,
-        credentials: "include",
       },
+      credentials: "include", // ✅ this must be outside "headers"
     }
   );
-  return res.json();
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch accounts: ${res.status}`);
+  }
+
+  return res.json(); // should contain { records: [...] }
 }
 
 export async function createAccount(
